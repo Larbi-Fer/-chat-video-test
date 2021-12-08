@@ -1,0 +1,120 @@
+body {
+    background: #222;
+}
+
+button {
+    margin: 15px;
+    padding: 10px 20px;
+    font-size: 17px;
+    background: #333;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    border: 0;
+    height: fit-content;
+    transition: .7s;
+}
+
+button:hover {
+    background: #444;
+    transition: .3s;
+}
+
+button:active {
+    background: #555;
+}
+
+.btn-secondary {
+    background: #fd162a;
+    width: 100%;
+}
+
+.btn-secondary:hover {
+    background: #ff3042;
+}
+
+.btn-secondary:active {
+    background: #f45;
+}
+
+input {
+    padding: 13px 15px;
+    font-size: 15px;
+    outline: none;
+    margin: 10px;
+    border-radius: 5px;
+    background: transparent;
+    border: 1px solid #151515;
+    color: #fff;
+}
+
+.form-input {
+    position: relative;
+    display: grid;
+}
+
+.form-input label {
+    position: absolute;
+    left: 20px;
+    top: 0;
+    background: #222;
+    padding: 2px 5px;
+    color: #fff9;
+}
+
+.form {
+    display: flex;
+    justify-content: space-around;
+}
+
+.videos {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.videos>div {
+    width: 46%
+}
+
+.videos video {
+    width: 100%;
+    border: 0.5px solid #111;
+    border-radius: 10px;
+}
+
+.videos h3 {
+    margin: 5px 20px;
+    color: #dedede;
+}
+
+@media ( max-width: 600px) {
+    .form {
+        display: block;
+    }
+    .form .form-input {
+        width: 90%;
+        margin-left: 5%;
+    }
+    .videos {
+        display: block;
+    }
+    .videos>div {
+        width: 90%;
+        margin-left: 5%;
+        position: relative;
+    }
+    .btn-secondary {
+        width: auto
+    }
+    .you-v {
+        position: absolute;
+        width: 25% !important;
+        top: 35px;
+        z-index: 100;
+        left: 10px;
+    }
+    .videos div:first-child h3 {
+        display: none;
+    }
+}
