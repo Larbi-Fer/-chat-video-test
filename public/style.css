@@ -1,5 +1,5 @@
 body {
-    background: #222;
+    background: url("/img.jpeg") no-repeat center;
 }
 
 button {
@@ -26,7 +26,6 @@ button:active {
 
 .btn-secondary {
     background: #fd162a;
-    width: 100%;
 }
 
 .btn-secondary:hover {
@@ -44,22 +43,35 @@ input {
     margin: 10px;
     border-radius: 5px;
     background: transparent;
-    border: 1px solid #151515;
+    border: 1px solid #fff5;
     color: #fff;
+    transition: all 0.1s;
+}
+
+input:hover,
+input:focus {
+    border-color: #fff;
 }
 
 .form-input {
     position: relative;
     display: grid;
+    background: #0009;
+    padding: 30px 50px 0 50px;
+    border-radius: 10px;
+}
+
+input::placeholder {
+    color: #fff9;
 }
 
 .form-input label {
     position: absolute;
-    left: 20px;
-    top: 0;
-    background: #222;
+    left: 45px;
+    top: 5px;
     padding: 2px 5px;
-    color: #fff9;
+    color: #fff;
+    font-size: 25px;
 }
 
 .form {
@@ -78,7 +90,8 @@ input {
 }
 
 .videos video {
-    width: 100%;
+    max-width: 100%;
+    max-height: 90%;
     border: 0.5px solid #111;
     border-radius: 10px;
 }
@@ -88,16 +101,94 @@ input {
     color: #dedede;
 }
 
+.notification {
+    /* display: flex;
+    justify-content: center; */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #0009;
+    border-radius: 5px;
+    padding: 10px 40px;
+    color: #fff;
+}
+
+.notification div:last-child {
+    margin-right: -30px;
+}
+
+.notification div:last-child * {
+    font-size: 14px;
+    margin: 5px;
+    padding: 7px 20px;
+}
+
+.notification-bottom {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background: #0007;
+}
+
+.videos.big {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 99.8%;
+    height: 100%;
+    z-index: 100000;
+    background: #0009;
+}
+
+.videos.big div:first-child {
+    position: absolute;
+    width: 20%;
+    left: 10%;
+    top: 7%;
+}
+
+.videos.big div:last-child {
+    width: 100%;
+}
+
+.videos.big div h3 {
+    display: none;
+}
+
+.videos.big div:last-child video {
+    width: 100%;
+    border: none;
+    margin-top: 25px;
+}
+
+@media ( max-width: 735px) {
+    .form-input {
+        padding: 30px 25px 0 25px;
+    }
+    .form-input label {
+        left: 25px;
+    }
+}
+
 @media ( max-width: 600px) {
     .form {
         display: block;
     }
     .form .form-input {
-        width: 90%;
-        margin-left: 5%;
+        width: 85%;
+        margin: auto;
+        margin-bottom: 10px;
     }
     .videos {
         display: block;
+    }
+    .videos video {
+        max-height: none !important;
+        max-width: none !important;
+        width: 100%;
     }
     .videos>div {
         width: 90%;

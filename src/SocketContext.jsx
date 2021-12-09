@@ -4,7 +4,8 @@ import Peer from 'simple-peer';
 
 const SocketContext = createContext()
 
-const socket = io("https://vd-chat.herokuapp.com/");
+// const socket = io("https://vd-chat.herokuapp.com/");
+const socket = io("http://localhost:5000");
 
 const ContextProvider = ({ children }) => {
     const [stream, setStream] = useState(null);
@@ -23,6 +24,7 @@ const ContextProvider = ({ children }) => {
             .then(currentStream => {
                 setStream(currentStream);
                 myVideo.current.srcObject = currentStream
+                console.log(currentStream)
             })
 
         socket.on("me", id => setMe(id))
@@ -74,6 +76,9 @@ const ContextProvider = ({ children }) => {
         setCallEnded(true);
         connectionRef.current.destroy()
 
+        /* setCall({});
+        setCallAccepted(false);
+        setCallEnded(false); */
         window.location.reload();
 
     }
