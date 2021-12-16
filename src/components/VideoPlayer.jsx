@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 import { SocketContext } from '../SocketContext'
 
 const VideoPlayer = () => {
-    const { name, callAccepted, myVideo, userVideo, callEnded, stream, call, myAudio } = useContext(SocketContext);
+    const { name, callAccepted, myVideo, userVideo, callEnded, stream, call } = useContext(SocketContext);
     return (
         <div className="videos">
             {/** Our own video */}
