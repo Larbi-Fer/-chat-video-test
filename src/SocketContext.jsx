@@ -6,8 +6,8 @@ import { io } from "socket.io-client";
 import Peer from 'simple-peer';
 
 const SocketContext = createContext()
-// const URL = "https://vd-chat.herokuapp.com"
-const URL = "http://localhost:5000"
+const URL = "https://vd-chat.herokuapp.com"
+// const URL = "http://localhost:5000"
 
 const socket = io(URL);
 
@@ -84,7 +84,7 @@ const ContextProvider = ({ children }) => {
     const sendMsg = () => {
         socket.on("sendvalue", data => {
             setChat2(data)
-            setTimeout(() => msgChat.current.scrollTo({ top: msgChat.current.scrollTop + 10000, behavior: 'smooth' }), 1000);
+            msgChat.current.scrollTo({ bottom: 0, behavior: 'smooth' })
         })
     }
 
@@ -166,7 +166,8 @@ const ContextProvider = ({ children }) => {
         socket.emit("sendvalue", { to: call.from, value: chatVl })
         setChat([...chat, { text: chatVl, isMe: true }])
         setChatVl('')
-        setTimeout(() => msgChat.current.scrollTo({ top: msgChat.current.scrollTop + 10000, behavior: 'smooth' }), 1000);
+        // setTimeout(() => msgChat.current.scrollTo({ top: msgChat.current.scrollTop + 10000, behavior: 'smooth' }), 1000);
+        msgChat.current.scrollTo({ bottom: 0, behavior: 'smooth' })
         // console.log(msgChat.current.scrollTo, msgChat.current.offsetHeight)
     }
 
