@@ -1,39 +1,26 @@
-import React, { useContext } from 'react'
+import React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { ContextProviderT } from "./SocketContextT"
 
-import VideoPlayer from './components/VideoPlayer';
-import Notifications from './components/Notifications';
-import Options from './components/Options';
-
-import { SocketContext } from "./SocketContext";
+import CallF from "./components/CallF"
+import CallT from "./components/CallT"
+import AddTeam from './components/AddTeam';
+import PageNotFound from './components/PageNotFound'
 
 function App() {
     // const classes = useStyle();
     return (
-        /* <BrowserRouter>
-            <Switch>
-                <Route path="/" exact component={CallF} />
-            </Switch>
-        </BrowserRouter> */
-        <CallF />
-    )
-}
-
-const CallF = () => {
-    const {videoOptions, isTr} = useContext(SocketContext)
-    const move = e => {
-        if (isTr) {
-            videoOptions.current.style.left = e.clientX + "px"
-            videoOptions.current.style.top = e.clientY + "px"
-            videoOptions.current.style.transform = "translate(-96%, -9%)"
-        }
-    }
-    return (
-        <div onMouseMove={move}>
-            <VideoPlayer />
-            <Options>
-                <Notifications />
-            </Options>
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" exact element={<CallF />} />
+                <Route path="/team/:id" exact element={<ContextProviderT><CallT /></ContextProviderT>} />
+                <Route path="/add-team" exact element={<AddTeam />} />
+                <Route
+                    path="*"
+                    element={<PageNotFound />}
+                    />
+            </Routes>
+        </BrowserRouter>
     )
 }
 

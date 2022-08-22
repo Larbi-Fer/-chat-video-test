@@ -1,9 +1,12 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 // import { Grid, Typography, Paper, makeStyles } from '@material-ui/core'
 import { SocketContext } from '../SocketContext'
 
 const VideoPlayer = () => {
-    const { name, callAccepted, myVideo, userVideo, callEnded, stream, call } = useContext(SocketContext);
+    const { name, callAccepted, myVideo, userVideo, callEnded, stream, call, setIsGetMedia } = useContext(SocketContext);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(() => setIsGetMedia(true), []);
+
     return (
         <div className="videos">
             {/** Our own video */}

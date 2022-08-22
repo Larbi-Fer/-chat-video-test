@@ -1,14 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react'
-// import { CopyToClipboard } from 'react-copy-clipboard';
-import { CallEnd, Assignment, AssignmentTurnedIn, Phone, GroupAdd, Videocam, VideocamOff, Mic, MicOff, ScreenShare, StopScreenShare, Send, Chat } from '@material-ui/icons'
+import { useNavigate } from 'react-router-dom';
+import { CallEnd, Assignment, AssignmentTurnedIn, Phone, GroupAdd, Videocam, VideocamOff, Mic, MicOff, Send, Chat } from '@material-ui/icons'
 
 import { SocketContext } from '../SocketContext';
 
 const Options = ({ children }) => {
-    const { me, callAccepted, name, setName, callEnded, leaveCall, callUser, setIsVideo, setIsVolume, isVideo, isVolume, isScreenShare, setIsScreenShare, chatVl, setChatVl, sendVl, chat, msgChat, setIsTr, videoOptions } = useContext(SocketContext);
+    const { me, callAccepted, name, setName, callEnded, callUser, chatVl, setChatVl, sendVl, chat, msgChat } = useContext(SocketContext);
     const [idToCall, setIdToCall] = useState('')
     const [isCopied, setIsCopied] = useState(false)
     const [chatActive, setChatActive] = useState(false)
+
+    const navigate = useNavigate()
 
     const handelCopy = () => {
         navigator.clipboard.writeText(me)
@@ -34,7 +36,7 @@ const Options = ({ children }) => {
     return (
         <div>
             <form onSubmit={e => e.preventDefault()} noValidate autoComplete="off" className="form">
-                <div className={callAccepted && !callEnded ? "chat-icon" : ""} onClick={() => setChatActive(!chatActive)}> <Chat fontSize="small" /> </div>
+                {callAccepted && !callEnded && <div className="chat-icon" onClick={() => setChatActive(!chatActive)}> <Chat fontSize="small" /> </div>}
                 <div className="form-input">
                     <label>Account Info</label>
                     <input placeholder="Name" type="text"  value={name} onChange={e => setName(e.target.value)} />
@@ -61,23 +63,30 @@ const Options = ({ children }) => {
                             <div style={{display: "flex"}}>
                                 <button style={{width: "100%"}} type="button" onClick={() => callUser(idToCall)}><Phone fontSize="medium"/></button>
                                 <button style={{width: "100%"}} type="button" onClick={handelPast}>Past</button>
-                                <button style={{width: "100%"}} type="button" onClick={handelPast} title="Add Team"><GroupAdd fontSize="medium" /></button>
+                                <button style={{width: "100%"}} type="button" onClick={() => navigate("/add-team")} title="Add Team"><GroupAdd fontSize="medium" /></button>
                             </div>
                         </>
                     )}
                 </div>
 
-                <div className="call-options" ref={videoOptions}>
-                    <button type="button" onClick={() => setIsVideo(!isVideo)}>{isVideo ? <Videocam fontSize="medium" /> : <VideocamOff fontSize="medium" />}</button>
-                    <button type="button" onClick={() => setIsVolume(!isVolume)}>{isVolume ? <Mic fontSize="medium" /> : <MicOff fontSize="medium" />}</button>
-                    <button type="button" onClick={() => setIsScreenShare(!isScreenShare)}>{isScreenShare ? <ScreenShare fontSize="medium" /> : <StopScreenShare fontSize="medium" />}</button>
-                    {callAccepted && !callEnded && <button type="button" className="btn-secondary" onClick={leaveCall}><CallEnd fontSize="medium" /></button>}
-                    <div onMouseDown={() => setIsTr(true)} onMouseUp={() => setIsTr(false)}className="trans"></div>
-                </div>
+                <CallOptions />
             </form>
             {children}
         </div>
     )
 }
+
+export const CallOptions = ({ team }) => {
+    const {setIsVideo, setIsVolume, isVideo, isVolume, leaveCall, setIsTr, videoOptions, callAccepted, callEnded} = useContext(SocketContext);
+    const size = team ? "small" : "medium"
+    return (
+        <div className={"call-options" + (team ? " me" : "")} ref={videoOptions}>
+            <button type="button" onClick={() => setIsVideo(!isVideo)}>{isVideo ? <Videocam fontSize={size} /> : <VideocamOff fontSize={size} />}</button>
+            <button type="button" onClick={() => setIsVolume(!isVolume)}>{isVolume ? <Mic fontSize={size} /> : <MicOff fontSize={size} />}</button>
+            {/* <button type="button" onClick={() => setIsScreenShare(!isScreenShare)}>{isScreenShare ? <ScreenShare fontSize={size} /> : <StopScreenShare fontSize={size} />}</button> */}
+            {!team && (callAccepted && !callEnded && <button type="button" className="btn-secondary" onClick={leaveCall}><CallEnd fontSize={size} /></button>)}
+            {!team && <div onMouseDown={() => setIsTr(true)} onMouseUp={() => setIsTr(false)}className="trans"></div>}
+</div>
+)}
 
 export default Options

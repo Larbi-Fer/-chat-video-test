@@ -2,6 +2,13 @@ body {
     background: url("/img.jpeg") no-repeat center;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #fff;
+}
+
 button {
     margin: 15px;
     padding: 10px 20px;
@@ -48,7 +55,8 @@ button:active {
     background: #64ff6f;
 }
 
-input {
+input,
+.input {
     padding: 13px 15px;
     font-size: 15px;
     outline: none;
@@ -57,11 +65,29 @@ input {
     background: transparent;
     border: 1px solid #fff5;
     color: #fff;
+    height: max-content;
+    position: relative;
     transition: all 0.1s;
 }
 
+.input {
+    padding-right: 55px;
+}
+
+.input img {
+    position: absolute;
+    top: 50%;
+    right: 2px;
+    transform: translate(-50%, -50%);
+    width: 30px !important;
+    height: 30px;
+    border-radius: 50%;
+}
+
 input:hover,
-input:focus {
+.input:hover,
+input:focus,
+.input:focus {
     border-color: #fff;
 }
 
@@ -75,6 +101,12 @@ input:focus {
 
 input::placeholder {
     color: #fff9;
+}
+
+.label-file {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .form-input label {
@@ -92,13 +124,15 @@ input::placeholder {
 }
 
 .videos {
+    position: relative;
     display: flex;
     justify-content: space-around;
     margin: 20px 0;
 }
 
 .videos>div {
-    width: 46%
+    position: relative;
+    width: 46%;
 }
 
 .videos video {
@@ -178,6 +212,32 @@ input::placeholder {
     width: 100%;
     border: none;
     margin-top: 25px;
+}
+
+.videos.team video {
+    width: 100%;
+}
+
+.call-options.me,
+.call-options.user {
+    position: absolute;
+    top: auto;
+    bottom: 40px;
+    background: none;
+}
+
+.videos.team h3,
+.videos.team h3 {
+    position: absolute;
+    left: 5px;
+}
+
+.call-options.user label {
+    padding: 5px;
+}
+
+.call-options.me button {
+    margin: 5px;
 }
 
 .call-options {
@@ -291,12 +351,57 @@ input::placeholder {
     z-index: 100002;
 }
 
+
+/* add team form */
+
+.add-form {
+    width: 40%;
+    background-color: #0008;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin: auto;
+    margin-top: 50px;
+    display: grid;
+}
+
+.add-form>div {
+    display: flex;
+}
+
+.add-form>div>div {
+    display: grid;
+}
+
+.add-form img {
+    width: 100%;
+}
+
+.add-form h2 {
+    text-align: center;
+    margin: 10px 0;
+}
+
+@media (max-width: 1030px) {
+    .add-form {
+        width: 50%;
+    }
+}
+
+@media (max-width: 820px) {
+    .add-form {
+        width: 60%;
+    }
+}
+
 @media (max-width: 735px) {
     .form-input {
         padding: 30px 25px 0 25px;
     }
     .form-input label {
         left: 25px;
+    }
+    .add-form {
+        width: 80%;
     }
 }
 
