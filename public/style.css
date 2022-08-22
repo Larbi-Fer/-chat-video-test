@@ -327,7 +327,7 @@ input::placeholder {
     padding-right: 38px;
 }
 
-.chat .input button {
+.chat .forminput button {
     position: absolute;
     top: 54%;
     right: 20px;
@@ -336,6 +336,10 @@ input::placeholder {
     margin: 0;
     padding: 0;
     transform: translateY(-50%);
+}
+
+.forminput {
+    position: relative;
 }
 
 .chat-icon {

@@ -6,8 +6,8 @@ import { io } from "socket.io-client";
 import Peer from 'simple-peer';
 
 const SocketContext = createContext()
-const URL = "https://vd-chat.herokuapp.com"
-// const URL = "https://vd-chat.herokuapp.com/"
+// const URL = "https://vd-chat.herokuapp.com"
+const URL = "http://localhost:5000"
 
 const socket = io(URL);
 

@@ -51,7 +51,7 @@ const Options = ({ children }) => {
                                     <div className={data.isMe ? "me" : "user"}><div>{data.text}</div></div>
                                 ))}
                             </div>
-                            <div onSubmit={sendVl} className="input">
+                            <div onSubmit={sendVl} className="forminput">
                                 <input type="text" value={chatVl} onChange={e => setChatVl(e.target.value)} placeholder='message ...' />
                                 <button onClick={sendVl} disable={!chatVl}><Send fontSize="small" /></button>
                             </div>
